@@ -41,8 +41,20 @@ async def on_message(message):
 	else:
 		if message.content.lower().startswith('!!'):
 			await client.process_commands(message)
-
-		message.content = re.sub('<@.*?>', '"someone"', message.content)
+		pattern = re.compile(r"<@(!?)([0-9]*)>")
+		mentions = pattern.findall(message.content)
+		print(mentions)
+		for mention in mentions[0]:
+			print (mention)
+			if not mention=="":
+				try:
+					name=discord.Guild.get_member(int(mention)) #Error: get_member() missing 1 required positional argument: 'user_id'
+					if name==None:
+						message.content.replace(f"<@{mention}>", "someone")
+					else:
+						message.content.replace(f"<@{mention}>", str(name.name))
+				except Exception as e:
+					print(e)
 		cur= conn.cursor()
 		guildID= str(message.guild.id)
 		r= cur.execute("SELECT * FROM main WHERE guild_id = '"+guildID+"'")
