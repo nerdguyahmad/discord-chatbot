@@ -1,3 +1,4 @@
+import re
 import discord
 import json
 import os
@@ -41,7 +42,7 @@ async def on_message(message):
 		if message.content.lower().startswith('!!'):
 			await client.process_commands(message)
 
-
+		message.content = re.sub('<@.*?>', '"someone"', message.content)
 		cur= conn.cursor()
 		guildID= str(message.guild.id)
 		r= cur.execute("SELECT * FROM main WHERE guild_id = '"+guildID+"'")
