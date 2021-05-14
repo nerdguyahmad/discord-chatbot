@@ -43,33 +43,30 @@ async def on_message(message):
 
 		cur= conn.cursor()
 		guildID= str(message.guild.id)
-		r= cur.execute("SELECT * FROM main WHERE guild_id = '"+guildID+"'")
+		cur= cur.execute("SELECT * FROM main WHERE guild_id = '"+guildID+"'")
 
-		row = None
-		for row in r:
-			...
+		cur= cur.fetchone()
 
-		if row[2] == "0":
+		if cur == None: # If channel isn't setup
 			return
 
-		if row == None:
+		if cur[2] == "0": # If chatbot is toggled off
 			return
 
-		elif row != None:
-			if message.channel.id == int(row[1]):
-				async with message.channel.typing():
-					try:
-						msg = message.content
-						if message.mentions != []:
-							for i in message.mentions:
-								msg = msg.replace(f'<@!{i.id}>', i.name)
+		if message.channel.id == int(cur[1]): # If channel is the chatting channel.
+			async with message.channel.typing():
+				try:
+					msg = message.content
+					if message.mentions != []:
+						for i in message.mentions:
+							msg = msg.replace(f'<@!{i.id}>', i.name)
 
-						response= await rs.get_ai_response(msg)
-					except json.decoder.JSONDecodeError:
-						await asyncio.sleep(3)
-						response= await rs.get_ai_response(msg)
+					response= await rs.get_ai_response(msg)
+				except json.decoder.JSONDecodeError:
+					await asyncio.sleep(3)
+					response= await rs.get_ai_response(msg)
 						
-				await message.channel.send(response)
+			await message.channel.send(response)
 					
 			else:
 				return
