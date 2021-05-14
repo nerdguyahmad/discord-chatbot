@@ -9,6 +9,7 @@ You need [Python 3.6+](https://python.org/)  to use this bot.
 #### Libraries required:
 - [`discord.py`](https://github.com/Rapptz/discord.py)
 - [`prsaw`](https://github.com/CodeWithSwastik/prsaw)
+- requests
 
 ### Installation:
 
