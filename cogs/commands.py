@@ -15,6 +15,7 @@ class Commands(commands.Cog):
 	async def setchannel(self, ctx, *, cbchannel: discord.TextChannel = None):
 		if cbchannel == None:
 			await ctx.send(":warning: You have to mention the channel that you want as the channel in which users will talk to me. Example: `!!setchannel #channel-name`")
+			await self.setchannel.reset_cooldown(ctx)
 			return
 		elif cbchannel != None:
 			try:
@@ -90,7 +91,7 @@ class Commands(commands.Cog):
 	async def toggle(self, ctx, *, toggle = None):
 		if toggle == None:
 			await ctx.send(":warning: Use the command again but mention the toggle i.e `on` or `off` For example: `!!settings toggle on` to toggle on, `!!settings toggle off` to toggle off.")
-		
+			await self.toggle.reset_cooldown(ctx)
 		elif toggle != None:
 			if toggle.lower() == "on":
 				toggle = '1'
