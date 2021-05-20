@@ -68,8 +68,8 @@ async def on_message(message):
 						
 			await message.channel.send(response)
 					
-			else:
-				return
+		else:
+			return
 
 @client.event
 async def on_command_error(ctx, error):
