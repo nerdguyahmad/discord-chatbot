@@ -1,3 +1,5 @@
+#### :warning: This code is outdated now, I didn't update it yet, I will do soon when I get some time but for now, This doesn't work. If you want, you can open a pull request to update it with new wrapper [randomstuff.py](https://github.com/nerdguyahmad/randomstuff.py)
+
 # Discord Chatbot
 
 Discord chat bot is a very simple chat bot made in Python using [Discord.py API wrapper](https://github.com/Rapptz/discord.py) and [prsaw](https://github.com/CodeWithSwastik/prsaw) library.
